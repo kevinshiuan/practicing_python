@@ -1,12 +1,21 @@
 import random
 
-def start_game():
+def start_game(z):
   print("Random number has been fucking picked!")
-  return(random.randint(1,10))
+  return(random.randint(1,z))
 
 def guess():
-  print("What's your fucking guess between 1 and 10?")
-  return(int(input('> ')))
+  while True:
+  	x = input("What's your fucking guess between 1 and 10?: ")
+  	
+  	try:
+  		y = int(x)
+  		break
+  	except:
+  		print('That\'s not a fucking whole number! Try again...')
+  		pass
+  		
+  return(y)
   
 def check(x,y):
   if y == x:
@@ -26,15 +35,18 @@ def play_again():
   elif playy == 'No':
     return(0)
 
+high_num = 10
+
 while True:
-  start = start_game()
+  start = start_game(high_num)
   count = 5
-  while count > 0:
+  guesses = []
+  while count - len(guesses) > 0:
     user_guess = guess()
-    count = count - 1
     if check(start,user_guess) == 1:
       break
     print("You've got {} more guesses, you pig.".format(str(count)))
+    user_guess.app(guesses)
       
   print("Game over, LOSER! Play again, LOSER? Yes or No?")
   
